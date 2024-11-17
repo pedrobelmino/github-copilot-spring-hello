@@ -25,8 +25,22 @@ public class CategoriaService {
     public Categoria save(Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
-
     public void deleteById(Long id) {
         categoriaRepository.deleteById(id);
     }
+
+    public Optional<Categoria> findByNome(String nome) {
+        return categoriaRepository.findByNome(nome);
+    }
+
+    public void deleteByNome(String nome) {
+        categoriaRepository.deleteByNome(nome);
+    }
+
+    public boolean validaCategoria(Categoria categoria) {
+        return Optional.ofNullable(categoria)
+                .map(Categoria::getNome)
+                .isPresent();
+    }
+
 }

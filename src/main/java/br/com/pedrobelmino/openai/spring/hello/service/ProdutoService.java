@@ -29,4 +29,13 @@ public class ProdutoService {
     public void deleteById(Long id) {
         produtoRepository.deleteById(id);
     }
+
+    public Produto update(Long id, Produto produto) {
+        return produtoRepository.save(produto);
+    }
+
+    // crie um método que deleta um produto por nome
+    public void deleteByNome(String nome) {
+        produtoRepository.deleteByNome(nome);
+    }
 }

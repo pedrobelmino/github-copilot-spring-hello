@@ -52,4 +52,17 @@ public class ProdutoController {
     public void deleteById(@PathVariable Long id) {
         produtoService.deleteById(id);
     }
+
+    @PutMapping("/{id}")
+    public ProdutoResponseDTO update(@PathVariable Long id, @RequestBody ProdutoRequestDTO produtoRequestDTO) {
+        Categoria categoria = categoriaService.findById(produtoRequestDTO.getCategoriaId())
+                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+        Produto produto = produtoMapper.toEntity(produtoRequestDTO, categoria);
+        return produtoMapper.toResponseDTO(produtoService.update(id, produto));
+    }
+
+    @DeleteMapping("/nome/{nome}")
+    public void deleteByNome(@PathVariable String nome) {
+        produtoService.deleteByNome(nome);
+    }
 }
